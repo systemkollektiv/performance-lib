@@ -7,7 +7,4 @@ const spec = {
   ws: 'function',
 }
 
-export default [
-  ...version(lib, spec),
-  ...version({ osc, ws }, spec)
-]
+export default [...version(lib, spec), ...version({ osc, ws }, spec)]
