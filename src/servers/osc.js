@@ -12,6 +12,8 @@ export const osc = (config, options = {}) => {
     console.log(' Host:', udpPort.options.localAddress + ', Port:', udpPort.options.localPort)
   })
 
+  opts.udpPort = udpPort
+
   udpPort.on('message', handler(opts, config))
 
   udpPort.on('error', err => {
@@ -19,4 +21,6 @@ export const osc = (config, options = {}) => {
   })
 
   udpPort.open()
+
+  return udpPort
 }
