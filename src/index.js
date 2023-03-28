@@ -6,6 +6,15 @@ export const osc = o
 export const ws = w
 export const config = c
 
+export {
+  performanceRecorderOscConfig,
+  performanceUiOscConfig,
+  testClientOscConfig,
+  outDir,
+  addresses,
+  shortAddresses,
+} from './config.js'
+
 export default {
   osc,
   ws,
