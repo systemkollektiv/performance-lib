@@ -7,12 +7,13 @@ export const ws = w
 export const config = c
 
 export {
+  addresses,
+  obsWebsocketConfig,
+  outDir,
   performanceRecorderOscConfig,
   performanceUiOscConfig,
-  testClientOscConfig,
-  outDir,
-  addresses,
   shortAddresses,
+  testClientOscConfig,
 } from './config.js'
 
 export default {

@@ -17,6 +17,13 @@ export const testClientOscConfig = {
   remotePort: performanceRecorderOscConfig.localPort,
 }
 
+export const obsWebsocketConfig = {
+  localAddress: '127.0.0.1',
+  localPort: '4455',
+  protocol: 'ws',
+  pass: '123456',
+}
+
 export const outDir = 'data'
 
 export const addresses = {
