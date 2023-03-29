@@ -3,6 +3,11 @@ export const performanceRecorderOscConfig = {
   localPort: 2324,
 }
 
+export const performancePlayerOscConfig = {
+  localAddress: '0.0.0.0',
+  localPort: 2327,
+}
+
 export const performanceUiOscConfig = {
   localAddress: '127.0.0.1',
   localPort: 2325,
@@ -32,6 +37,7 @@ export const addresses = {
   STOP: '/stopRecording',
   SCREENSHOT: '/takeScreenshot',
   SET_PERFORMANCE_NAME: '/recFileName',
+  SET_SERVER_CONFIG: '/setServerConfig',
 }
 
 export const shortAddresses = {
