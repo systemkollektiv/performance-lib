@@ -1,8 +1,8 @@
 import oscPlugin from 'osc'
 
-const defaultHandler = oscMessage => console.log(oscMessage)
+const defaultHandler = () => oscMessage => console.log(oscMessage)
 
-export const osc = (config, options = {}) => {
+export const osc = async (config, options = {}) => {
   const { handler = defaultHandler, ...opts } = options
 
   const udpPort = new oscPlugin.UDPPort(config)
@@ -14,7 +14,7 @@ export const osc = (config, options = {}) => {
 
   opts.udpPort = udpPort
 
-  udpPort.on('message', handler(opts, config))
+  udpPort.on('message', await handler(opts, config))
 
   udpPort.on('error', err => {
     console.log(err)
