@@ -10,6 +10,7 @@ export {
   addresses,
   obsWebsocketConfig,
   outDir,
+  performancePlayerOscConfig,
   performanceRecorderOscConfig,
   performanceUiOscConfig,
   shortAddresses,
