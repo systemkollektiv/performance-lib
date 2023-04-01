@@ -40,4 +40,9 @@ export const addresses = {
   SET_SERVER_CONFIG: '/setServerConfig',
   START_REPLAY: '/startReplay',
   STOP_REPLAY: '/stopReplay',
+
+  /* internal messages */
+  ADD_REMOTES: '/addRemote',
+  REMOVE_REMOTES: '/removeRemote',
+  GET_REMOTES: '/getRemotes',
 }
