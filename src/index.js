@@ -13,7 +13,6 @@ export {
   performancePlayerOscConfig,
   performanceRecorderOscConfig,
   performanceUiOscConfig,
-  shortAddresses,
   testClientOscConfig,
 } from './config.js'
 
