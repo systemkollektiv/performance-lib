@@ -3,7 +3,7 @@ export const urlToObject = (url = '127.0.0.1') => {
     return
   }
 
-  console.log({url})
+  console.log({ url })
 
   const [address, port = '2323'] = url.split(':')
 
