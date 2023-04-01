@@ -38,9 +38,6 @@ export const addresses = {
   SCREENSHOT: '/takeScreenshot',
   SET_PERFORMANCE_NAME: '/recFileName',
   SET_SERVER_CONFIG: '/setServerConfig',
-}
-
-export const shortAddresses = {
-  TRANSLATE: 't',
-  SCREENSHOT: 's',
+  START_REPLAY: '/startReplay',
+  STOP_REPLAY: '/stopReplay',
 }
