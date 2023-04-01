@@ -42,7 +42,7 @@ export const addresses = {
   STOP_REPLAY: '/stopReplay',
 
   /* internal messages */
-  ADD_REMOTES: '/addRemote',
-  REMOVE_REMOTES: '/removeRemote',
+  ADD_REMOTES: '/addRemotes',
+  REMOVE_REMOTES: '/removeRemotes',
   GET_REMOTES: '/getRemotes',
 }
