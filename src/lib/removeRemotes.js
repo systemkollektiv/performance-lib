@@ -10,4 +10,6 @@ export const removeRemotes = (urls, state) => {
       state.remotes.splice(index, 1)
     }
   })
+
+  return state
 }

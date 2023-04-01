@@ -7,4 +7,6 @@ export const addRemotes = (urls, state) => {
       state.remotes.push(urlToObject(url))
     }
   })
+
+  return state
 }
