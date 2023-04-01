@@ -5,6 +5,11 @@ import lib, { config, osc, ws } from '../src/index.js'
 const spec = {
   osc: 'function',
   ws: 'function',
+  urlToObject: 'function',
+  addRemotes: 'function',
+  removeRemotes: 'function',
+  sendRemotes: 'function',
+  send: 'function',
   config: {
     addresses: 'array',
     obsWebsocketConfig: {},
