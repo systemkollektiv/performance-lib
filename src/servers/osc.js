@@ -14,8 +14,9 @@ import {
 export const osc = async (config, options = {}) => {
   const { handler = defaultHandler, ...opts } = options
   const { state } = opts
+  const { remoteUrls = [] } = state
 
-  state.remotes = state.remoteUrls.map(urlToObject)
+  state.remotes = remoteUrls.map(urlToObject)
 
   state.udpPort = new oscPlugin.UDPPort(config)
 
@@ -24,7 +25,9 @@ export const osc = async (config, options = {}) => {
 
     log.success('Listening', 'for OSC over UDP.')
     log.info('Host:', localAddress + ', Port:', localPort)
-    log.info('Remotes:', state.remoteUrls.join(' '))
+    if (state.remoteUrls?.length) {
+      log.info('Remotes:', state.remoteUrls.join(' '))
+    }
   })
 
   const h = await handler({ ...opts, state }, config)
