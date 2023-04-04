@@ -17,8 +17,6 @@ export const osc = async server => {
     }
   })
 
-  const h = await server.handler()
-
   udpPort.on('message', oscMessage => {
     const { address, args = [] } = oscMessage
 
@@ -29,7 +27,7 @@ export const osc = async server => {
     } else if (address === addresses.GET_REMOTES) {
       server.sendRemotes(args)
     } else {
-      h({ address, args })
+      server.handler({ address, args })
     }
   })
 
