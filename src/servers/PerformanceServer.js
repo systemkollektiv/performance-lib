@@ -5,6 +5,17 @@ import { urlToObject } from '../lib/urlToObject.js'
 import { ws } from './ws.js'
 import { obs } from './obs.js'
 
+const hasArgs = (name, args) => {
+  if (args[name] === false) {
+    return false
+  }
+
+  const names = [name, `${name}Address`, `${name}Port`]
+
+  const hasArg = names.some(n => args.hasOwnProperty(n) && args[n])
+  return hasArg
+}
+
 export class PerformanceServer {
   constructor(args) {
     this.verbose = args.hasOwnProperty('verbose')
@@ -18,23 +29,23 @@ export class PerformanceServer {
     const {
       oscAddress = '127.0.0.1',
       oscPort,
-      wsAddress = '127.0.0.1',
-      wsPort,
-      wsProtocol,
-      obsAddress,
+      obsAddress = '127.0.0.1',
       obsPort = 4455,
       obsPassword,
       obsProtocol = 'ws',
+      wsAddress = '127.0.0.1',
+      wsPort,
+      wsProtocol = 'ws',
     } = args
 
-    if (oscPort) {
+    if (hasArgs('osc', args)) {
       this.oscConfig = {
         localAddress: oscAddress,
         localPort: oscPort,
       }
     }
 
-    if (wsPort) {
+    if (hasArgs('ws', args)) {
       this.wsConfig = {
         port: wsPort,
         address: wsAddress,
@@ -42,7 +53,7 @@ export class PerformanceServer {
       }
     }
 
-    if (obsAddress) {
+    if (hasArgs('obs', args)) {
       this.obsConfig = {
         port: obsPort,
         address: obsAddress,
