@@ -1,7 +1,28 @@
 import log from '@magic/log'
-import { osc, urlToObject } from '@systemkollektiv/performance-lib'
+
+import { osc } from './osc.js'
+import { urlToObject } from '../lib/urlToObject.js'
 
 export class PerformanceServer {
+  constructor(args) {
+    this.verbose = args.hasOwnProperty('verbose')
+
+    if (args.remoteUrls?.length) {
+      this.remoteUrls = args.remoteUrls
+
+      this.remotes = args.remoteUrls.map(urlToObject)
+    }
+
+    const { localAddress = '127.0.0.1', localPort } = args
+
+    if (localPort) {
+      this.oscConfig = {
+        localAddress,
+        localPort,
+      }
+    }
+  }
+
   async init() {
     if (this.oscConfig) {
       this.udpPort = await osc(this)
