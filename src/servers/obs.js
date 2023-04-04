@@ -1,8 +1,6 @@
 import OBSWebSocket from 'obs-websocket-js'
 
-const isIntable = e => parseInt(e) === +parseInt(e)
-
-export const obs = (parent) => {
+export const obs = async parent => {
   const { obsConfig, obsEventSubscriptions = {} } = parent
 
   const obsWebSocket = new OBSWebSocket()
