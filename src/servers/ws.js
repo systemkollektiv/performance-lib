@@ -1,18 +1,17 @@
-import { createServer } from 'node:http'
+import http from 'node:http'
+
+
 import { WebSocketServer } from 'ws'
 
-export const ws = (config = {}) => {
-  const { localAddress = '127.0.0.1', localPort = 2324 } = config
+export const ws = (parent) => {
+  const { address = '127.0.0.1', port = 2324 } = parent.wsConfig
 
-  const server =
-    createServer(/*{
-    // cert: readFileSync('/path/to/cert.pem'),
-    // key: readFileSync('/path/to/key.pem')
-  }*/)
+  const serverConfig = {}
+  const server = http.createServer(serverConfig)
 
   const wss = new WebSocketServer({ server })
 
-  server.listen(localPort, localAddress)
+  server.listen(port, address)
 
   return wss
 }
