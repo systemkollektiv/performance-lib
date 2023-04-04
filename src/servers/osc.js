@@ -2,55 +2,42 @@ import log from '@magic/log'
 
 import oscPlugin from 'osc'
 
-import { addresses } from '../config.js'
-import {
-  addRemotes,
-  defaultHandler,
-  removeRemotes,
-  sendRemotes,
-  urlToObject,
-} from '../lib/index.js'
+import addresses from '../addresses.js'
 
-export const osc = async (config, options = {}) => {
-  const { handler = defaultHandler, ...opts } = options
-  const { state } = opts
-  const { remoteUrls = [] } = state
+export const osc = async (server) => {
+  const udpPort = new oscPlugin.UDPPort(server.oscConfig)
 
-  state.remotes = remoteUrls.map(urlToObject)
-
-  state.udpPort = new oscPlugin.UDPPort(config)
-
-  state.udpPort.on('ready', () => {
-    const { localAddress, localPort } = state.udpPort.options
+  udpPort.on('ready', () => {
+    const { localAddress, localPort } = udpPort.options
 
     log.success('Listening', 'for OSC over UDP.')
     log.info('Host:', localAddress + ', Port:', localPort)
-    if (state.remoteUrls?.length) {
-      log.info('Remotes:', state.remoteUrls.join(' '))
+    if (server.remoteUrls?.length) {
+      log.info('Remotes:', server.remoteUrls.join(' '))
     }
   })
 
-  const h = await handler({ ...opts, state }, config)
+  const h = await server.handler()
 
-  state.udpPort.on('message', oscMessage => {
+  udpPort.on('message', oscMessage => {
     const { address, args = [] } = oscMessage
 
     if (address === addresses.ADD_REMOTES) {
-      state = addRemotes(args, state)
+      server.addRemotes(args)
     } else if (address === addresses.REMOVE_REMOTES) {
-      state = removeRemotes(args, state)
+      server.removeRemotes(args)
     } else if (address === addresses.GET_REMOTES) {
-      state = sendRemotes(args, state)
+      server.sendRemotes(args)
     } else {
       h({ address, args })
     }
   })
 
-  state.udpPort.on('error', err => {
+  udpPort.on('error', err => {
     console.log(err)
   })
 
-  state.udpPort.open()
+  udpPort.open()
 
-  return state
+  return udpPort
 }

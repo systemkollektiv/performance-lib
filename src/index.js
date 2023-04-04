@@ -4,11 +4,14 @@ import { ws as w } from './servers/ws.js'
 import * as c from './config.js'
 import { urlToObject as u } from './lib/index.js'
 
+import { PerformanceServer as PS } from './servers/PerformanceServer.js'
+
 export const urlToObject = u
 
 export const osc = o
 export const ws = w
 export const config = c
+export const PerformanceServer = PS
 
 export {
   obsWebsocketConfig,
@@ -27,4 +30,5 @@ export default {
   config,
   addresses,
   urlToObject,
+  PerformanceServer,
 }

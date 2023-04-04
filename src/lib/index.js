@@ -1,6 +1,2 @@
-export { addRemotes } from './addRemotes.js'
-export { defaultHandler } from './defaultHandler.js'
-export { removeRemotes } from './removeRemotes.js'
 export { send } from './send.js'
-export { sendRemotes } from './sendRemotes.js'
 export { urlToObject } from './urlToObject.js'
