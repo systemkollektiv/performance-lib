@@ -1,4 +1,4 @@
-import addr from './addresses.js'
+import { addresses as a } from './addresses.js'
 import { osc as o } from './servers/osc.js'
 import { ws as w } from './servers/ws.js'
 import * as c from './config.js'
@@ -22,7 +22,7 @@ export {
   testClientOscConfig,
 } from './config.js'
 
-export const addresses = addr
+export const addresses = a
 
 export default {
   osc,

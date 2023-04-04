@@ -1,4 +1,4 @@
-export default {
+export const addresses = {
   TRANSLATE: '/PosRot',
   START: '/startRecording',
   STOP: '/stopRecording',

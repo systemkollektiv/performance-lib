@@ -2,7 +2,7 @@ import log from '@magic/log'
 
 import oscPlugin from 'osc'
 
-import addresses from '../addresses.js'
+import { addresses } from '../addresses.js'
 
 export const osc = async server => {
   const udpPort = new oscPlugin.UDPPort(server.oscConfig)
