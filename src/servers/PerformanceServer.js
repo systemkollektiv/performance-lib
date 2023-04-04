@@ -2,6 +2,8 @@ import log from '@magic/log'
 
 import { osc } from './osc.js'
 import { urlToObject } from '../lib/urlToObject.js'
+import { ws } from './ws.js'
+import { obs } from './obs.js'
 
 export class PerformanceServer {
   constructor(args) {
@@ -13,12 +15,39 @@ export class PerformanceServer {
       this.remotes = args.remoteUrls.map(urlToObject)
     }
 
-    const { localAddress = '127.0.0.1', localPort } = args
+    const {
+      oscAddress = '127.0.0.1',
+      oscPort,
+      wsAddress = '127.0.0.1',
+      wsPort,
+      wsProtocol,
+      obsAddress,
+      obsPort = 4455,
+      obsPassword,
+      obsProtocol = 'ws',
+    } = args
 
-    if (localPort) {
+    if (oscPort) {
       this.oscConfig = {
-        localAddress,
-        localPort,
+        localAddress: oscAddress,
+        localPort: oscPort,
+      }
+    }
+
+    if (wsPort) {
+      this.wsConfig = {
+        port: wsPort,
+        address: wsAddress,
+        protocol: wsProtocol,
+      }
+    }
+
+    if (obsAddress) {
+      this.obsConfig = {
+        port: obsPort,
+        address: obsAddress,
+        password: obsPassword,
+        protocol: obsProtocol,
       }
     }
   }
@@ -26,6 +55,14 @@ export class PerformanceServer {
   async init() {
     if (this.oscConfig) {
       this.udpPort = await osc(this)
+    }
+
+    if (this.wsConfig) {
+      this.wss = await ws(this)
+    }
+
+    if (this.obsConfig) {
+      this.obs = await obs(this)
     }
   }
 
