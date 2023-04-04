@@ -4,7 +4,7 @@ export const performanceRecorderOscConfig = {
 }
 
 export const performancePlayerOscConfig = {
-  localAddress: '0.0.0.0',
+  localAddress: '127.0.0.1',
   localPort: 2327,
 }
 
