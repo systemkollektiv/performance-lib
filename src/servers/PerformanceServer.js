@@ -37,7 +37,7 @@ export class PerformanceServer {
     })
   }
 
-  sendRemotes (args) {
+  sendRemotes(args) {
     const [remoteAddress, ...remotes] = args
 
     remotes.forEach(url => {

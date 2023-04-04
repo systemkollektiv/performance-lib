@@ -4,7 +4,7 @@ import oscPlugin from 'osc'
 
 import addresses from '../addresses.js'
 
-export const osc = async (server) => {
+export const osc = async server => {
   const udpPort = new oscPlugin.UDPPort(server.oscConfig)
 
   udpPort.on('ready', () => {
