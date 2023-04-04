@@ -65,11 +65,11 @@ export class PerformanceServer {
 
   async init() {
     if (this.oscConfig) {
-      this.udpPort = await osc(this)
+      this.osc = await osc(this)
     }
 
     if (this.wsConfig) {
-      this.wss = await ws(this)
+      this.ws = await ws(this)
     }
 
     if (this.obsConfig) {
@@ -77,8 +77,8 @@ export class PerformanceServer {
     }
   }
 
-  handler() {
-    return oscMessage => log.info(oscMessage)
+  handler(oscMessage) {
+    log.info('received', oscMessage)
   }
 
   addRemotes(urls, state) {
@@ -116,5 +116,22 @@ export class PerformanceServer {
     })
 
     return state
+  }
+
+  sendToRemotes() {
+    /*
+     * if a websocketserver has been passed as argument, broadcast all messages onwards to all clients.
+     */
+    if (this.ws && msg) {
+      this.ws.clients.forEach(client => {
+        if (client.readyState === WebSocket.OPEN) {
+          client.send(msg)
+        }
+      })
+    }
+
+    this.remotes.forEach(url => {
+      this.osc.send({ address, args }, url.address, url.port)
+    })
   }
 }
