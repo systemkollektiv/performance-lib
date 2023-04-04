@@ -1,3 +1,4 @@
+import addr from './addresses.js'
 import { osc as o } from './servers/osc.js'
 import { ws as w } from './servers/ws.js'
 import * as c from './config.js'
@@ -10,7 +11,6 @@ export const ws = w
 export const config = c
 
 export {
-  addresses,
   obsWebsocketConfig,
   outDir,
   performancePlayerOscConfig,
@@ -19,9 +19,12 @@ export {
   testClientOscConfig,
 } from './config.js'
 
+export const addresses = addr
+
 export default {
   osc,
   ws,
   config,
+  addresses,
   urlToObject,
 }

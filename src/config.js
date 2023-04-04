@@ -30,19 +30,3 @@ export const obsWebsocketConfig = {
 }
 
 export const outDir = 'data'
-
-export const addresses = {
-  TRANSLATE: '/PosRot',
-  START: '/startRecording',
-  STOP: '/stopRecording',
-  SCREENSHOT: '/takeScreenshot',
-  SET_PERFORMANCE_NAME: '/recFileName',
-  SET_SERVER_CONFIG: '/setServerConfig',
-  START_REPLAY: '/startReplay',
-  STOP_REPLAY: '/stopReplay',
-
-  /* internal messages */
-  ADD_REMOTES: '/addRemotes',
-  REMOVE_REMOTES: '/removeRemotes',
-  GET_REMOTES: '/getRemotes',
-}
