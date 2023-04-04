@@ -118,7 +118,7 @@ export class PerformanceServer {
     return state
   }
 
-  sendToRemotes({ address, args, msg }) {
+  send({ address, args, msg }) {
     /*
      * if a websocketserver has been passed as argument, broadcast all messages onwards to all clients.
      */
