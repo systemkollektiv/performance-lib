@@ -113,10 +113,29 @@ export class PerformanceServer {
   }
 
   send({ address, args, msg }) {
+    if (msg) {
+      const [a, ...parts] = msg.split(' ')
+      if (!address) {
+        address = a
+      }
+      if (!args) {
+        args = parts
+      }
+    }
+
+    if (!msg) {
+      if (address) {
+        msg = address
+      }
+      if (args) {
+        msg = `${msg} ${args.join(' ')}`.trim()
+      }
+    }
+
     /*
      * if a websocketserver has been passed as argument, broadcast all messages onwards to all clients.
      */
-    if (this.ws && msg) {
+    if (this.ws) {
       this.ws.clients.forEach(client => {
         if (client.readyState === WebSocket.OPEN) {
           client.send(msg)
