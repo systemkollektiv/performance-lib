@@ -20,4 +20,6 @@ export const addresses = {
   ADD_DIRECTORIES: '/addDirectory',
   REMOVE_DIRECTORIES: '/removeDirectory',
   GET_DIRECTORIES: '/getDirectories',
+
+  LOAD_IMAGE: '/loadImage',
 }
