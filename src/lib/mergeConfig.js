@@ -6,11 +6,21 @@ export const mergeConfig = (options = {}, defaults = {}) => {
   }
 
   if (is.arr(options) && is.arr(defaults)) {
-    if (options.length) {
+    if (options.length > defaults.length) {
       return options
     }
 
-    return defaults
+    if (!options.length) {
+      return defaults
+    }
+
+    return defaults.map((def, i) => {
+      if (options.length > i + 1) {
+        return options[i]
+      }
+
+      return def
+    })
   }
 
   return Object.fromEntries(
