@@ -1,20 +1,10 @@
 import log from '@magic/log'
+import is from '@magic/types'
 
 import { osc } from './osc.js'
-import { urlToObject } from '../lib/urlToObject.js'
 import { ws } from './ws.js'
 import { obs } from './obs.js'
-
-const hasArgs = (name, args) => {
-  if (args[name] === false) {
-    return false
-  }
-
-  const names = [name, `${name}Address`, `${name}Port`]
-
-  const hasArg = names.some(n => args.hasOwnProperty(n) && args[n])
-  return hasArg
-}
+import { urlToObject } from '../lib/urlToObject.js'
 
 export class PerformanceServer {
   constructor(args) {
@@ -26,26 +16,30 @@ export class PerformanceServer {
       this.remotes = args.remoteUrls.map(urlToObject)
     }
 
+    const osc = args.hasOwnProperty('osc')
+    const obs = args.hasOwnProperty('obs')
+    const ws = args.hasOwnProperty('ws')
+
     const {
       oscAddress = '127.0.0.1',
-      oscPort,
+      oscPort = 2328,
       obsAddress = '127.0.0.1',
       obsPort = 4455,
       obsPassword,
       obsProtocol = 'ws',
       wsAddress = '127.0.0.1',
-      wsPort,
+      wsPort = 8888,
       wsProtocol = 'ws',
     } = args
 
-    if (hasArgs('osc', args)) {
+    if (osc) {
       this.oscConfig = {
         localAddress: oscAddress,
         localPort: oscPort,
       }
     }
 
-    if (hasArgs('ws', args)) {
+    if (ws) {
       this.wsConfig = {
         port: wsPort,
         address: wsAddress,
@@ -53,7 +47,7 @@ export class PerformanceServer {
       }
     }
 
-    if (hasArgs('obs', args)) {
+    if (obs) {
       this.obsConfig = {
         port: obsPort,
         address: obsAddress,
