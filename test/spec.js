@@ -2,7 +2,6 @@ import { version } from '@magic/test'
 
 import lib, { config, osc, PerformanceServer, ws } from '../src/index.js'
 
-
 const spec = {
   osc: 'function',
   ws: 'function',
