@@ -16,4 +16,8 @@ export const addresses = {
   ADD_REMOTES: '/addRemotes',
   REMOVE_REMOTES: '/removeRemotes',
   GET_REMOTES: '/getRemotes',
+
+  ADD_DIRECTORIES: '/addDirectory',
+  REMOVE_DIRECTORIES: '/removeDirectory',
+  GET_DIRECTORIES: '/getDirectories',
 }
