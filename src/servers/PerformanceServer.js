@@ -16,9 +16,9 @@ export class PerformanceServer {
       this.remotes = args.remoteUrls.map(urlToObject)
     }
 
-    const osc = args.hasOwnProperty('osc')
-    const obs = args.hasOwnProperty('obs')
-    const ws = args.hasOwnProperty('ws')
+    const osc = args.hasOwnProperty('osc') && args.osc !== false
+    const obs = args.hasOwnProperty('obs') && args.obs !== false
+    const ws = args.hasOwnProperty('ws') && args.ws !== false
 
     const {
       oscAddress = '127.0.0.1',
@@ -32,6 +32,8 @@ export class PerformanceServer {
       wsProtocol = 'ws',
       debug = false,
     } = args
+
+    this.debug = debug
 
     if (osc) {
       this.oscConfig = {
