@@ -2,7 +2,8 @@ import log from '@magic/log'
 
 import OBSWebSocket from 'obs-websocket-js'
 
-export const obs = async (parent, resolve) => {
+export const obs = async parent => new Promise(async resolve => {
+
   const { obsConfig, obsEventSubscriptions = 0 } = parent
   const url = `${obsConfig.protocol}://${obsConfig.address}:${obsConfig.port}`
 
@@ -22,4 +23,4 @@ export const obs = async (parent, resolve) => {
     log.info('obs refused the connection to', url, 'retrying in', waitForRetryDuration / 1000, 'seconds')
     setTimeout(() => obs(parent, resolve), waitForRetryDuration)
   }
-}
+})
