@@ -18,6 +18,7 @@
     "@magic/test": "0.2.17"
   },
   "dependencies": {
+    "@magic/types": "0.1.23",
     "obs-websocket-js": "5.0.2",
     "osc": "2.4.4",
     "ws": "8.13.0"
