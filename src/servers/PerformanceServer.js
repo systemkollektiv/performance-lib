@@ -1,5 +1,5 @@
-import log from '@magic/log'
 import is from '@magic/types'
+import log from '@magic/log'
 
 import { osc } from './osc.js'
 import { ws } from './ws.js'
@@ -30,6 +30,7 @@ export class PerformanceServer {
       wsAddress = '127.0.0.1',
       wsPort = 8888,
       wsProtocol = 'ws',
+      debug = false,
     } = args
 
     if (osc) {
@@ -37,6 +38,8 @@ export class PerformanceServer {
         localAddress: oscAddress,
         localPort: oscPort,
       }
+
+      this.log('set osc config', this.oscConfig)
     }
 
     if (ws) {
@@ -45,6 +48,8 @@ export class PerformanceServer {
         address: wsAddress,
         protocol: wsProtocol,
       }
+
+      this.log('set ws config', this.wsConfig)
     }
 
     if (obs) {
@@ -54,6 +59,14 @@ export class PerformanceServer {
         password: obsPassword,
         protocol: obsProtocol,
       }
+
+      this.log('set obs config', this.obsConfig)
+    }
+  }
+
+  log(...msgs) {
+    if (this.debug) {
+      log.info(...msgs)
     }
   }
 
