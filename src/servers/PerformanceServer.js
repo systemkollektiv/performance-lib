@@ -126,6 +126,10 @@ export class PerformanceServer {
   }
 
   send({ address, args, msg }) {
+    if (!is.empty(args) && !is.array(args)) {
+      args = [args]
+    }
+
     if (msg) {
       const [a, ...parts] = msg.split(' ')
       if (!address) {
@@ -141,7 +145,7 @@ export class PerformanceServer {
         msg = address
       }
       if (args) {
-        msg = `${msg} ${args.join(' ')}`.trim()
+        msg = `${msg} ${args.map(arg => arg.value ? arg.value : arg).join(' ')}`.trim()
       }
     }
 
