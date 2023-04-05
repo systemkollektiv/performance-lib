@@ -1,7 +1,7 @@
 import OBSWebSocket from 'obs-websocket-js'
 
 export const obs = async parent => {
-  const { obsConfig, obsEventSubscriptions = {} } = parent
+  const { obsConfig, obsEventSubscriptions = 0 } = parent
 
   const obsWebSocket = new OBSWebSocket()
 
