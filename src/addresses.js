@@ -7,6 +7,7 @@ export const addresses = {
   SET_SERVER_CONFIG: '/setServerConfig',
   START_REPLAY: '/startReplay',
   STOP_REPLAY: '/stopReplay',
+  SHOW_INTRO: '/showIntro',
 
   USER_INPUT: '/userInput',
   USER_SELECT_SCENE: '/userSelectScene',
