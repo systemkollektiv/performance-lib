@@ -23,4 +23,5 @@ export const addresses = {
   GET_DIRECTORIES: '/getDirectories',
 
   LOAD_IMAGE: '/loadImage',
+  LOAD_IMAGES: '/loadImages',
 }
