@@ -34,6 +34,7 @@ export class PerformanceServer {
     } = args
 
     this.debug = debug
+    console.log('PerformanceServer debug', this.debug)
 
     if (osc) {
       this.oscConfig = {
@@ -147,7 +148,7 @@ export class PerformanceServer {
         msg = address
       }
       if (args) {
-        msg = `${msg} ${args.map(arg => arg.value ? arg.value : arg).join(' ')}`.trim()
+        msg = `${msg} ${args.map(arg => (arg.value ? arg.value : arg)).join(' ')}`.trim()
       }
     }
 
@@ -155,6 +156,7 @@ export class PerformanceServer {
      * if a websocketserver has been passed as argument, broadcast all messages onwards to all clients.
      */
     if (this.ws) {
+      log('sending to ws clients', msg)
       this.ws.clients.forEach(client => {
         if (client.readyState === WebSocket.OPEN) {
           client.send(msg)
@@ -162,6 +164,7 @@ export class PerformanceServer {
       })
     }
 
+    log('sending to osc remotes', { address, args, remotes: this.remotes })
     this.remotes.forEach(url => {
       this.osc.send({ address, args }, url.address, url.port)
     })
