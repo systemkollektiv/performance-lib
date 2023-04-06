@@ -30,11 +30,10 @@ export class PerformanceServer {
       wsAddress = '127.0.0.1',
       wsPort = 8888,
       wsProtocol = 'ws',
-      debug = false,
     } = args
 
-    this.debug = debug
-    console.log('PerformanceServer debug', this.debug)
+    this.debug = args.hasOwnProperty('debug')
+    this.log('PerformanceServer debug', this.debug)
 
     if (osc) {
       this.oscConfig = {
@@ -88,7 +87,7 @@ export class PerformanceServer {
   }
 
   handler(oscMessage) {
-    log.info('received', oscMessage)
+    this.log('received', oscMessage)
   }
 
   addRemotes(urls, state) {
@@ -156,7 +155,7 @@ export class PerformanceServer {
      * if a websocketserver has been passed as argument, broadcast all messages onwards to all clients.
      */
     if (this.ws) {
-      log('sending to ws clients', msg)
+      this.log('sending to ws clients', msg)
       this.ws.clients.forEach(client => {
         if (client.readyState === WebSocket.OPEN) {
           client.send(msg)
@@ -164,7 +163,7 @@ export class PerformanceServer {
       })
     }
 
-    log('sending to osc remotes', { address, args, remotes: this.remotes })
+    this.log('sending to osc remotes', { address, args, remotes: this.remotes })
     this.remotes.forEach(url => {
       this.osc.send({ address, args }, url.address, url.port)
     })
