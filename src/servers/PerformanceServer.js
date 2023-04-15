@@ -30,6 +30,7 @@ export class PerformanceServer {
       wsAddress = '127.0.0.1',
       wsPort = 8888,
       wsProtocol = 'ws',
+      obsEventSubscriptions = 0,
     } = args
 
     this.debug = args.hasOwnProperty('debug')
@@ -61,6 +62,8 @@ export class PerformanceServer {
         password: obsPassword,
         protocol: obsProtocol,
       }
+
+      this.obsEventSubscriptions = obsEventSubscriptions
 
       this.log('set obs config', this.obsConfig)
     }
