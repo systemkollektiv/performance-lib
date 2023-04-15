@@ -39,7 +39,7 @@ export class PerformanceServer {
     if (osc) {
       this.oscConfig = {
         localAddress: oscAddress,
-        localPort: oscPort,
+        localPort: parseInt(oscPort),
       }
 
       this.log('set osc config', this.oscConfig)
@@ -47,7 +47,7 @@ export class PerformanceServer {
 
     if (ws) {
       this.wsConfig = {
-        port: wsPort,
+        port: parseInt(wsPort),
         address: wsAddress,
         protocol: wsProtocol,
       }
@@ -57,7 +57,7 @@ export class PerformanceServer {
 
     if (obs) {
       this.obsConfig = {
-        port: obsPort,
+        port: parseInt(obsPort),
         address: obsAddress,
         password: obsPassword,
         protocol: obsProtocol,
@@ -124,7 +124,7 @@ export class PerformanceServer {
     remotes.forEach(url => {
       const [address, port] = url.split(':')
       const msg = { address: remoteAddress, args: this.remoteUrls }
-      state.udpPort.send(msg, address, port)
+      state.udpPort.send(msg, address, parseInt(port))
     })
 
     return state
@@ -168,7 +168,7 @@ export class PerformanceServer {
 
     this.log('sending to osc remotes', { address, args, remotes: this.remotes })
     this.remotes.forEach(url => {
-      this.osc.send({ address, args }, url.address, url.port)
+      this.osc.send({ address, args }, url.address, parseInt(url.port))
     })
   }
 }
