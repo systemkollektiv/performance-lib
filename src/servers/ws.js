@@ -1,5 +1,7 @@
 import http from 'node:http'
 
+import log from '@magic/log'
+
 import { WebSocketServer } from 'ws'
 
 export const ws = parent => {
