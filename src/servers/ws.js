@@ -10,7 +10,10 @@ export const ws = parent => {
 
   const wss = new WebSocketServer({ server })
 
-  server.listen(port, address)
+  server.listen(port, address, () => {
+    log.success('Listening', 'for Websockets.')
+    log.info('Host:', address + ', Port:', port)
+  })
 
   return wss
 }
