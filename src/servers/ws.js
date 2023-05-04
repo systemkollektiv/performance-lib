@@ -4,7 +4,7 @@ import log from '@magic/log'
 
 import { WebSocketServer } from 'ws'
 
-export const ws = parent => {
+export const ws = async parent => {
   const { address = '127.0.0.1', port = 2324 } = parent.wsConfig
 
   const serverConfig = {}
@@ -12,10 +12,29 @@ export const ws = parent => {
 
   const wss = new WebSocketServer({ server })
 
-  server.listen(port, address, () => {
-    log.success('Listening', 'for Websockets.')
-    log.info('Host:', address + ', Port:', port)
+  console.log('init wss')
+
+  wss.on('connection', ws => {
+    console.log('init ws connection')
+
+    if (parent.onMessage) {
+      ws.on('message', parent.onMessage)
+    }
+
+    if (parent.onError) {
+      ws.on('error', parent.onError)
+    } else {
+      ws.on('error', console.error)
+    }
+
+    ws.on('open', (...args) => console.log('ws open', ...args))
   })
 
-  return wss
+  return new Promise(resolve => {
+    server.listen(port, () => {
+      log.success('Listening for Websockets.')
+      log.info('Host:', address + ', Port:', port)
+      resolve(wss)
+    })
+  })
 }
