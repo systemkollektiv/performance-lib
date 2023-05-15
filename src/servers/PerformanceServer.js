@@ -31,7 +31,13 @@ export class PerformanceServer {
       wsPort = 8888,
       wsProtocol = 'ws',
       obsEventSubscriptions = 0,
+      certDir,
     } = args
+
+    this.certDir = args
+    if (certDir && !path.isAbsolute(this.certDir)) {
+      this.certDir = path.join(process.cwd(), this.certDir)
+    }
 
     this.debug = args.hasOwnProperty('debug')
     this.log('PerformanceServer debug', this.debug)
