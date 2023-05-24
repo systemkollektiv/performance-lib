@@ -167,14 +167,14 @@ export class PerformanceServer {
     /*
      * if a websocketserver has been passed as argument, broadcast all messages onwards to all clients.
      */
-    if (this.ws) {
-      this.log('sending to ws clients', msg)
-      this.ws.clients.forEach(client => {
-        if (client.readyState === WebSocket.OPEN) {
-          client.send(msg)
-        }
-      })
-    }
+    // if (this.ws) {
+    //   this.log('sending to ws clients', msg)
+    //   this.ws.clients.forEach(client => {
+    //     if (client.readyState === WebSocket.OPEN) {
+    //       client.send(msg)
+    //     }
+    //   })
+    // }
 
     this.log('sending to osc remotes', { address, args, remotes: this.remotes })
     this.remotes.forEach(url => {
