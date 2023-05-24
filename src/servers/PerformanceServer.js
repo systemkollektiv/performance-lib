@@ -144,9 +144,11 @@ export class PerformanceServer {
 
     if (msg) {
       const [a, ...parts] = msg.split(' ')
+
       if (!address) {
         address = a
       }
+
       if (!args) {
         args = parts
       }
@@ -156,6 +158,7 @@ export class PerformanceServer {
       if (address) {
         msg = address
       }
+
       if (args) {
         msg = `${msg} ${args.map(arg => (arg.value ? arg.value : arg)).join(' ')}`.trim()
       }
