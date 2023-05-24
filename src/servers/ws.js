@@ -9,7 +9,7 @@ import { WebSocketServer } from 'ws'
 
 export const ws = async parent => {
   const { address = '127.0.0.1', port = 2324 } = parent.wsConfig
-  let { certDir } = parent
+  const { certDir } = parent
 
   let server
 
@@ -32,7 +32,7 @@ export const ws = async parent => {
   // console.log('init WebSocketServer', wss)
 
   wss.on('connection', ws => {
-    console.log('init WebSocket connection')
+    // console.log('init WebSocket connection')
 
     if (parent.onMessage) {
       ws.on('message', parent.onMessage)
@@ -48,7 +48,7 @@ export const ws = async parent => {
   })
 
   return new Promise(resolve => {
-    server.listen(port, () => {
+    server.listen({ port, host: address }, () => {
       log.success('Listening for Websockets.')
       log.info('Host:', address + ', Port:', port)
       resolve(wss)
