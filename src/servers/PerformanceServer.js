@@ -6,11 +6,14 @@ import log from '@magic/log'
 import { osc } from './osc.js'
 import { ws } from './ws.js'
 import { obs } from './obs.js'
-import { urlToObject } from '../lib/urlToObject.js'
+
+import { getLocalNetworkAddress, urlToObject } from '../lib/index.js'
 
 export class PerformanceServer {
   constructor(args) {
     this.verbose = args.hasOwnProperty('verbose')
+
+    this.localNetworkAddress = getLocalNetworkAddress()
 
     if (args.remoteUrls?.length) {
       this.remoteUrls = args.remoteUrls
@@ -23,13 +26,13 @@ export class PerformanceServer {
     const ws = args.hasOwnProperty('ws') && args.ws !== false
 
     const {
-      oscAddress = '127.0.0.1',
+      oscAddress = this.localNetworkAddress,
       oscPort = 2328,
       obsAddress = '127.0.0.1',
       obsPort = 4455,
       obsPassword,
       obsProtocol = 'ws',
-      wsAddress = '127.0.0.1',
+      wsAddress = this.localNetworkAddress,
       wsPort = 8888,
       wsProtocol = 'ws',
       obsEventSubscriptions = 0,
