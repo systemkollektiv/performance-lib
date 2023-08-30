@@ -34,6 +34,10 @@ export const ws = async parent => {
   wss.on('connection', ws => {
     // console.log('init WebSocket connection')
 
+    if (parent.registerWebsocket) {
+      parent.registerWebsocket(ws)
+    }
+
     if (parent.onMessage) {
       ws.on('message', parent.onMessage)
     }
